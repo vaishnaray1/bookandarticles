@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all books articles
+      List of all Books and Articles
     </h1>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div>
   <div>
     <h2>
-      Add a new books article
+      Add a new book or article
     </h2>
 
     <form action="/insert_books_article" method="post">
@@ -51,20 +51,38 @@
         <label for="genre_box">
           Genre
         </label>
-
-        <input type="text" id="genre_box" name="query_genre">
+        
+        <select id="query_genre" name="query_genre">
+          <%BooksArticle.all.each do |bookorauth|%>
+           <option value="<%=bookorauth.genre%>"><%=bookorauth.genre%></option>
+           <option value="Other">Other</option>
+          <%end%>
+        </select>
+        
       </div>
-
+      <div>
+      <label for="other_genre">
+          If you chose the genre of Other, please be more specific. 
+        </label>
+      <input type="text" id="other_genre" name="other_genre">
+      </div>
       <div>
         <label for="author_id_box">
           Author
         </label>
 
-        <input type="text" id="author_id_box" name="query_author_id">
+        <select id="query_author_id" name="query_author_id">
+          <%Author.all.each do |author|%>
+           <option value="<%=author.id%>"><%=author.title%></option>
+          <%end%>
+        </select>
       </div>
 
+      <div>
+        If the author is not in the list, please add him or her <a href="/authors">here</a>
+      </div>
       <button>
-        Create books article
+        Add the book or article
       </button>
     </form>
   </div>
