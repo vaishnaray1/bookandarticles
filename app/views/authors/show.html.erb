@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Author #<%= @the_author.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/authors">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_author/<%= @the_author.id %>">
+          Delete author
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_author.name %>
+      </dd>
+
+      <dt>
+        Birthdate
+      </dt>
+      <dd>
+        <%= @the_author.birthdate %>
+      </dd>
+
+      <dt>
+        Bio
+      </dt>
+      <dd>
+        <%= @the_author.bio %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_author.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_author.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit author
+    </h2>
+
+    <form action="/modify_author/<%= @the_author.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_author.name %>">
+      </div>
+
+      <div>
+        <label for="birthdate_box">
+          Birthdate
+        </label>
+
+        <input type="date" id="birthdate_box" name="query_birthdate" value="<%= @the_author.birthdate %>">
+      </div>
+
+      <div>
+        <label for="bio_box">
+          Bio
+        </label>
+
+        <textarea id="bio_box" name="query_bio"><%= @the_author.bio %></textarea>
+      </div>
+
+      <button>
+        Update author
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

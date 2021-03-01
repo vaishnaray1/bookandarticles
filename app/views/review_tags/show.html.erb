@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Review tag #<%= @the_review_tag.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/review_tags">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_review_tag/<%= @the_review_tag.id %>">
+          Delete review tag
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Tag
+      </dt>
+      <dd>
+        <%= @the_review_tag.tag_id %>
+      </dd>
+
+      <dt>
+        Review
+      </dt>
+      <dd>
+        <%= @the_review_tag.review_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_review_tag.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_review_tag.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit review tag
+    </h2>
+
+    <form action="/modify_review_tag/<%= @the_review_tag.id %>"  method="post" >
+      <div>
+        <label for="tag_id_box">
+          Tag
+        </label>
+
+        <input type="text" id="tag_id_box" name="query_tag_id" value="<%= @the_review_tag.tag_id %>">
+      </div>
+
+      <div>
+        <label for="review_id_box">
+          Review
+        </label>
+
+        <input type="text" id="review_id_box" name="query_review_id" value="<%= @the_review_tag.review_id %>">
+      </div>
+
+      <button>
+        Update review tag
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

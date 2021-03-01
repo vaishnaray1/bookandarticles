@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of all books articles
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new books article
+    </h2>
+
+    <form action="/insert_books_article" method="post">
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="url_box">
+          Url
+        </label>
+
+        <input type="text" id="url_box" name="query_url">
+      </div>
+
+      <div>
+        <label for="date_published_box">
+          Date published
+        </label>
+
+        <input type="date" id="date_published_box" name="query_date_published">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="genre_box">
+          Genre
+        </label>
+
+        <input type="text" id="genre_box" name="query_genre">
+      </div>
+
+      <div>
+        <label for="author_id_box">
+          Author
+        </label>
+
+        <input type="text" id="author_id_box" name="query_author_id">
+      </div>
+
+      <button>
+        Create books article
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Url
+        </th>
+
+        <th>
+          Date published
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Genre
+        </th>
+
+        <th>
+          Author
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_books_articles.each do |a_books_article| %>
+      <tr>
+        <td>
+          <%= a_books_article.id %>
+        </td>
+
+        <td>
+          <%= a_books_article.title %>
+        </td>
+
+        <td>
+          <%= a_books_article.url %>
+        </td>
+
+        <td>
+          <%= a_books_article.date_published %>
+        </td>
+
+        <td>
+          <%= a_books_article.description %>
+        </td>
+
+        <td>
+          <%= a_books_article.genre %>
+        </td>
+
+        <td>
+          <%= a_books_article.author_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_books_article.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_books_article.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/books_articles/<%= a_books_article.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

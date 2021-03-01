@@ -1,0 +1,160 @@
+<div>
+  <div>
+    <h1>
+      List of all reviews
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new review
+    </h2>
+
+    <form action="/insert_review" method="post">
+      <div>
+        <label for="query_rating">
+          Rating
+        </label>
+        <select name="query_rating" id="query_rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="query_notes">
+          Notes
+        </label>
+
+        <textarea id="query_notes" name="query_notes" rows="5" columns="50"></textarea>
+      </div>
+
+      <div>
+        <label for="query_recommend">
+          Recommend to others?
+        </label>
+
+        <select name="query_recommend" id="query_recommend">
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="query_book_article_id">
+          Which book or article is this review for?
+        </label>
+
+        
+          <select name="query_book_article_id" id="query_book_article_id">
+            <%@list_of_book_articles.each do |bookorart|%>
+              <option value="<%=bookorart.id%>"><%=bookorart.title%></option>
+            <%end%>
+          </select>
+          
+      </div>
+
+      <div>
+        If the book or article is not in the list, please add it <a href="/books_articles">here</a>
+      </div>
+
+      <button>
+        Create review
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Rating
+        </th>
+
+        <th>
+          Notes
+        </th>
+
+        <th>
+          Recommend
+        </th>
+
+        <th>
+          Book article
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_reviews.each do |a_review| %>
+      <tr>
+        <td>
+          <%= a_review.id %>
+        </td>
+
+        <td>
+          <%= a_review.rating %>
+        </td>
+
+        <td>
+          <%= a_review.notes %>
+        </td>
+
+        <td>
+          <%= a_review.recommend %>
+        </td>
+
+        <td>
+          <%= a_review.book_article_id %>
+        </td>
+
+        <td>
+          <%= a_review.user_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_review.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_review.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/reviews/<%= a_review.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

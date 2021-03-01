@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Tag #<%= @the_tag.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/tags">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_tag/<%= @the_tag.id %>">
+          Delete tag
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Tag
+      </dt>
+      <dd>
+        <%= @the_tag.tag %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_tag.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_tag.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit tag
+    </h2>
+
+    <form action="/modify_tag/<%= @the_tag.id %>"  method="post" >
+      <div>
+        <label for="tag_box">
+          Tag
+        </label>
+
+        <input type="text" id="tag_box" name="query_tag" value="<%= @the_tag.tag %>">
+      </div>
+
+      <button>
+        Update tag
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all authors
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new author
+    </h2>
+
+    <form action="/insert_author" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="birthdate_box">
+          Birthdate
+        </label>
+
+        <input type="date" id="birthdate_box" name="query_birthdate">
+      </div>
+
+      <div>
+        <label for="bio_box">
+          Bio
+        </label>
+
+        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create author
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Birthdate
+        </th>
+
+        <th>
+          Bio
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_authors.each do |an_author| %>
+      <tr>
+        <td>
+          <%= an_author.id %>
+        </td>
+
+        <td>
+          <%= an_author.name %>
+        </td>
+
+        <td>
+          <%= an_author.birthdate %>
+        </td>
+
+        <td>
+          <%= an_author.bio %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_author.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_author.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/authors/<%= an_author.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all review tags
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new review tag
+    </h2>
+
+    <form action="/insert_review_tag" method="post">
+      <div>
+        <label for="tag_id_box">
+          Tag
+        </label>
+
+        <input type="text" id="tag_id_box" name="query_tag_id">
+      </div>
+
+      <div>
+        <label for="review_id_box">
+          Review
+        </label>
+
+        <input type="text" id="review_id_box" name="query_review_id">
+      </div>
+
+      <button>
+        Create review tag
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Tag
+        </th>
+
+        <th>
+          Review
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_review_tags.each do |a_review_tag| %>
+      <tr>
+        <td>
+          <%= a_review_tag.id %>
+        </td>
+
+        <td>
+          <%= a_review_tag.tag_id %>
+        </td>
+
+        <td>
+          <%= a_review_tag.review_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_review_tag.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_review_tag.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/review_tags/<%= a_review_tag.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

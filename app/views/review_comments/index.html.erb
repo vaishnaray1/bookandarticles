@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all review comments
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new review comment
+    </h2>
+
+    <form action="/insert_review_comment" method="post">
+      <div>
+        <label for="comment_box">
+          Comment
+        </label>
+
+        <textarea id="comment_box" name="query_comment" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="review_id_box">
+          Review
+        </label>
+
+        <input type="text" id="review_id_box" name="query_review_id">
+      </div>
+
+      <button>
+        Create review comment
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Comment
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Review
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_review_comments.each do |a_review_comment| %>
+      <tr>
+        <td>
+          <%= a_review_comment.id %>
+        </td>
+
+        <td>
+          <%= a_review_comment.comment %>
+        </td>
+
+        <td>
+          <%= a_review_comment.user_id %>
+        </td>
+
+        <td>
+          <%= a_review_comment.review_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_review_comment.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_review_comment.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/review_comments/<%= a_review_comment.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

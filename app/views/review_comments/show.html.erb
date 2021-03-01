@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Review comment #<%= @the_review_comment.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/review_comments">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_review_comment/<%= @the_review_comment.id %>">
+          Delete review comment
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Comment
+      </dt>
+      <dd>
+        <%= @the_review_comment.comment %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_review_comment.user_id %>
+      </dd>
+
+      <dt>
+        Review
+      </dt>
+      <dd>
+        <%= @the_review_comment.review_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_review_comment.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_review_comment.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit review comment
+    </h2>
+
+    <form action="/modify_review_comment/<%= @the_review_comment.id %>"  method="post" >
+      <div>
+        <label for="comment_box">
+          Comment
+        </label>
+
+        <textarea id="comment_box" name="query_comment"><%= @the_review_comment.comment %></textarea>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_review_comment.user_id %>">
+      </div>
+
+      <div>
+        <label for="review_id_box">
+          Review
+        </label>
+
+        <input type="text" id="review_id_box" name="query_review_id" value="<%= @the_review_comment.review_id %>">
+      </div>
+
+      <button>
+        Update review comment
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
