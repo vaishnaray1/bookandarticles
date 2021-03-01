@@ -6,16 +6,18 @@
 
     <div>
       <div>
-        <a href="/reviews">
+        <a href="/allreviews">
           Go back
         </a>
       </div>
 
-      <div>
-        <a href="/delete_review/<%= @the_review.id %>">
-          Delete review
-        </a>
-      </div>
+      <%if session[:user_id] == @the_review.user_id%>
+        <div>
+          <a href="/delete_review/<%= @the_review.id %>">
+            Delete review
+          </a>
+        </div>
+      <%end%>
     </div>
 
     <dl>
@@ -75,57 +77,137 @@
 
 
 <div>
+  <%if session[:user_id] == @the_review.user_id%>
   <div>
-    <h2>
-      Edit review
-    </h2>
+      <h2>
+        Edit review
+      </h2>
 
-    <form action="/modify_review/<%= @the_review.id %>"  method="post" >
-      <div>
-        <label for="rating_box">
-          Rating
-        </label>
+      <form action="/modify_review/<%= @the_review.id %>"  method="post" >
+        <div>
+          <label for="rating_box">
+            Rating
+          </label>
 
-        <input type="text" id="rating_box" name="query_rating" value="<%= @the_review.rating %>">
-      </div>
+          <input type="text" id="rating_box" name="query_rating" value="<%= @the_review.rating %>">
+        </div>
 
-      <div>
-        <label for="notes_box">
-          Notes
-        </label>
+        <div>
+          <label for="notes_box">
+            Notes
+          </label>
 
-        <textarea id="notes_box" name="query_notes"><%= @the_review.notes %></textarea>
-      </div>
+          <textarea id="notes_box" name="query_notes"><%= @the_review.notes %></textarea>
+        </div>
 
-      <div>
-        <label for="recommend_box">
-          Recommend
-        </label>
+        <div>
+          <label for="recommend_box">
+            Recommend
+          </label>
 
-        <input type="text" id="recommend_box" name="query_recommend" value="<%= @the_review.recommend %>">
-      </div>
+          <input type="text" id="recommend_box" name="query_recommend" value="<%= @the_review.recommend %>">
+        </div>
 
-      <div>
-        <label for="book_article_id_box">
-          Book article
-        </label>
+        <div>
+          <label for="book_article_id_box">
+            Book article
+          </label>
 
-        <input type="text" id="book_article_id_box" name="query_book_article_id" value="<%= @the_review.book_article_id %>">
-      </div>
+          <input type="text" id="book_article_id_box" name="query_book_article_id" value="<%= @the_review.book_article_id %>">
+        </div>
 
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
+        <div>
+          <label for="user_id_box">
+            User
+          </label>
 
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_review.user_id %>">
-      </div>
+          <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_review.user_id %>">
+        </div>
 
-      <button>
-        Update review
-      </button>
-    </form>
+        <button>
+          Update review
+        </button>
+      </form>
   </div>
+  <%end%>
 </div>
 
 <hr>
+
+<div>
+<h2>
+  Add a comment
+</h2>
+
+<form action="/insert_review_comment"  method="post" >
+        <div>
+          <label for="query_comment">
+            Comment
+          </label>
+          <textarea id="query_comment" name="query_comment" rows="5" columns="50"></textarea>
+
+  
+
+          <input type="hidden" id="query_review_id" name="query_review_id" value="<%= @the_review.id %>">
+        </div>
+
+        
+
+        <button>
+          Add Comment
+        </button>
+      </form>
+
+</div>
+
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Comment
+        </th>
+
+      
+        <th>
+          Created at
+        </th>
+
+      </tr>
+
+      <% @list_of_comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= comment.id %>
+        </td>
+
+        <td>
+          <%= comment.user_id %>
+        </td>
+
+        <td>
+          <%= comment.comment %>
+        </td>
+
+    
+
+        <td>
+          <%= time_ago_in_words(comment.created_at) %> ago
+        </td>
+     
+
+    
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+

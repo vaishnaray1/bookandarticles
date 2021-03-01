@@ -20,14 +20,14 @@ class ReviewCommentsController < ApplicationController
   def create
     the_review_comment = ReviewComment.new
     the_review_comment.comment = params.fetch("query_comment")
-    the_review_comment.user_id = params.fetch("query_user_id")
+    the_review_comment.user_id = session[:user_id]
     the_review_comment.review_id = params.fetch("query_review_id")
 
     if the_review_comment.valid?
       the_review_comment.save
-      redirect_to("/review_comments", { :notice => "Review comment created successfully." })
+      redirect_to("/reviews/"+the_review_comment.review_id.to_s, { :notice => "Review comment created successfully." })
     else
-      redirect_to("/review_comments", { :notice => "Review comment failed to create successfully." })
+      redirect_to("/reviews/"+the_review_comment.review_id.to_s, { :notice => "Review comment failed to create successfully." })
     end
   end
 

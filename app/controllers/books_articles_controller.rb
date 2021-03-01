@@ -19,18 +19,22 @@ class BooksArticlesController < ApplicationController
 
   def create
     the_books_article = BooksArticle.new
+    if params.fetch("query_genre") =="Other"
+      the_books_article.genre = params.fetch("other_genre")
+    else
+      the_books_article.genre = params.fetch("query_genre")
+    end
     the_books_article.title = params.fetch("query_title")
     the_books_article.url = params.fetch("query_url")
     the_books_article.date_published = params.fetch("query_date_published")
     the_books_article.description = params.fetch("query_description")
-    the_books_article.genre = params.fetch("query_genre")
     the_books_article.author_id = params.fetch("query_author_id")
 
     if the_books_article.valid?
       the_books_article.save
       redirect_to("/books_articles", { :notice => "Books article created successfully." })
     else
-      redirect_to("/books_articles", { :notice => "Books article failed to create successfully." })
+      redirect_to("/books_articles", { :alert => "Books article failed to create successfully." })
     end
   end
 

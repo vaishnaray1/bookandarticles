@@ -151,7 +151,9 @@ Rails.application.routes.draw do
   post("/insert_review", {:controller => "reviews", :action => "create" })
           
   # READ
-  get("/reviews", { :controller => "reviews", :action => "index" })
+  get("/myreviews", { :controller => "reviews", :action => "index" })
+
+  get("/allreviews", { :controller => "reviews", :action => "all" })
   
   get("/reviews/:path_id", { :controller => "reviews", :action => "show" })
   

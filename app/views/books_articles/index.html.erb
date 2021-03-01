@@ -25,7 +25,7 @@
 
       <div>
         <label for="url_box">
-          Url
+          URL, if online article
         </label>
 
         <input type="text" id="url_box" name="query_url">
@@ -53,10 +53,11 @@
         </label>
         
         <select id="query_genre" name="query_genre">
-          <%BooksArticle.all.each do |bookorauth|%>
-           <option value="<%=bookorauth.genre%>"><%=bookorauth.genre%></option>
-           <option value="Other">Other</option>
+          <%genrearray = BooksArticle.distinct.pluck(:genre)%>
+          <%genrearray.each do |genre|%>
+           <option value="<%=genre%>"><%=genre%></option>
           <%end%>
+          <option value="Other">Other</option>
         </select>
         
       </div>
@@ -73,7 +74,7 @@
 
         <select id="query_author_id" name="query_author_id">
           <%Author.all.each do |author|%>
-           <option value="<%=author.id%>"><%=author.title%></option>
+           <option value="<%=author.id%>"><%=author.name%></option>
           <%end%>
         </select>
       </div>

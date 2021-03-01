@@ -17,6 +17,9 @@ class ReviewsController < ApplicationController
 
     @the_review = matching_reviews.at(0)
 
+    matching_review_comments = ReviewComment.all
+
+    @list_of_comments = matching_review_comments.where({:review_id => the_id}).order({ :created_at => :desc })
     render({ :template => "reviews/show.html.erb" })
   end
 
@@ -31,12 +34,22 @@ class ReviewsController < ApplicationController
 
     if the_review.valid?
       the_review.save
-      redirect_to("/reviews", { :notice => "Review created successfully." })
+      redirect_to("/myreviews", { :notice => "Review created successfully." })
     else
-      redirect_to("/reviews", { :notice => "Review failed to create successfully." })
+      redirect_to("/myreviews", { :notice => "Review failed to create successfully." })
     end
   end
 
+
+  def all
+    matching_reviews = Review.all
+    @list_of_reviews = matching_reviews.order({ :created_at => :desc })
+
+    @list_of_book_articles = BooksArticle.all
+
+    render({ :template => "reviews/all.html.erb" })
+
+  end
   def update
     the_id = params.fetch("path_id")
     the_review = Review.where({ :id => the_id }).at(0)

@@ -27,4 +27,6 @@ class BooksArticle < ApplicationRecord
   validates(:description, { :presence => true })
   
   validates(:date_published, { :presence => true })
+
+  
 end

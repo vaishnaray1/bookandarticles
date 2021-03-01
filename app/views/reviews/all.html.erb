@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of my reviews
+      List of all reviews
     </h1>
   </div>
 </div>
@@ -42,8 +42,8 @@
         </label>
 
         <select name="query_recommend" id="query_recommend">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
         </select>
       </div>
 
@@ -97,7 +97,10 @@
           Book article
         </th>
 
-      
+        <th>
+          User
+        </th>
+
         <th>
           Created at
         </th>
@@ -130,6 +133,10 @@
 
         <td>
           <%= a_review.book_article_id %>
+        </td>
+
+        <td>
+          <%= a_review.user_id %>
         </td>
 
         <td>

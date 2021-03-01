@@ -27,7 +27,7 @@ class AuthorsController < ApplicationController
       the_author.save
       redirect_to("/authors", { :notice => "Author created successfully." })
     else
-      redirect_to("/authors", { :notice => "Author failed to create successfully." })
+      redirect_to("/authors", { :alert => "Author failed to create successfully." })
     end
   end
 
