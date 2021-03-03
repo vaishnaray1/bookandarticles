@@ -28,5 +28,5 @@ class BooksArticle < ApplicationRecord
   
   validates(:date_published, { :presence => true })
 
-  
+  validates(:author_id, { :presence => true })
 end

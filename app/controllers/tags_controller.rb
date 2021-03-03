@@ -18,15 +18,16 @@ class TagsController < ApplicationController
   end
 
   def create
-    the_tag = Tag.new
-    the_tag.tag = params.fetch("query_tag")
+    list_of_tags = params.fetch("query_tag").split(",")
+    list_of_tags.each do |tag|
+      the_tag = Tag.new
+      the_tag.tag = tag
 
-    if the_tag.valid?
-      the_tag.save
-      redirect_to("/tags", { :notice => "Tag created successfully." })
-    else
-      redirect_to("/tags", { :notice => "Tag failed to create successfully." })
+      if the_tag.valid?
+        the_tag.save
+      end
     end
+    redirect_to("/myreviews", { :notice => "Review created successfully." })
   end
 
   def update

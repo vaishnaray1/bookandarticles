@@ -16,6 +16,25 @@
 
     <form action="/insert_review" method="post">
       <div>
+        <label for="query_book_article_id">
+          Which book or article is this review for?
+        </label>
+
+        
+          <select name="query_book_article_id" id="query_book_article_id">
+            <%@list_of_book_articles.each do |bookorart|%>
+              <option value="<%=bookorart.id%>"><%=bookorart.title%></option>
+            <%end%>
+          </select>
+
+    
+      </div>
+
+      <div>
+        If the book or article is not in the list, please add it <a href="/books_articles">here</a>
+      </div>
+
+      <div>
         <label for="query_rating">
           Rating
         </label>
@@ -38,7 +57,7 @@
 
       <div>
         <label for="query_recommend">
-          Recommend to others?
+          Recommend to Others?
         </label>
 
         <select name="query_recommend" id="query_recommend">
@@ -47,22 +66,16 @@
         </select>
       </div>
 
-      <div>
-        <label for="query_book_article_id">
-          Which book or article is this review for?
-        </label>
-
-        
-          <select name="query_book_article_id" id="query_book_article_id">
-            <%@list_of_book_articles.each do |bookorart|%>
-              <option value="<%=bookorart.id%>"><%=bookorart.title%></option>
-            <%end%>
-          </select>
+   
           
-      </div>
+    
 
-      <div>
-        If the book or article is not in the list, please add it <a href="/books_articles">here</a>
+        <div>
+
+      <label for ="query_tags">
+          Review Tags (separate each tag by a comma)
+        </label>
+        <textarea id="query_tags" name="query_tags" rows="2" columns="50"></textarea>
       </div>
 
       <button>
@@ -77,11 +90,19 @@
   <div>
     <table>
       <tr>
+       
+
+       
+
         <th>
-          ID
+          Book or Article Title
         </th>
 
         <th>
+          Reviewer
+        </th>
+
+         <th>
           Rating
         </th>
 
@@ -90,23 +111,15 @@
         </th>
 
         <th>
-          Recommend
+          Recommend to Others?
         </th>
 
         <th>
-          Book article
+          Created
         </th>
 
         <th>
-          User
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
+          Updated
         </th>
 
         <th>
@@ -115,10 +128,18 @@
 
       <% @list_of_reviews.each do |a_review| %>
       <tr>
+       
+
+
         <td>
-          <%= a_review.id %>
+          <%= a_review.book_article.title %>
         </td>
 
+        <td>
+          <%= a_review.user.name %>
+        </td>
+
+        
         <td>
           <%= a_review.rating %>
         </td>
@@ -129,14 +150,6 @@
 
         <td>
           <%= a_review.recommend %>
-        </td>
-
-        <td>
-          <%= a_review.book_article_id %>
-        </td>
-
-        <td>
-          <%= a_review.user_id %>
         </td>
 
         <td>

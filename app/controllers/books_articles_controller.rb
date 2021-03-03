@@ -32,9 +32,9 @@ class BooksArticlesController < ApplicationController
 
     if the_books_article.valid?
       the_books_article.save
-      redirect_to("/books_articles", { :notice => "Books article created successfully." })
+      redirect_to("/books_articles", { :notice => "Books/article created successfully." })
     else
-      redirect_to("/books_articles", { :alert => "Books article failed to create successfully." })
+      redirect_to("/books_articles", { :alert => "Book/article failed to create successfully." })
     end
   end
 

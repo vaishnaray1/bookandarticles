@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Review #<%= @the_review.id %> details
+      Review on <%= @the_review.book_article.title %> 
     </h1>
 
     <div>
@@ -36,35 +36,35 @@
       </dd>
 
       <dt>
-        Recommend
+        Recommend this book to Others?
       </dt>
       <dd>
         <%= @the_review.recommend %>
       </dd>
 
       <dt>
-        Book article
+        Book/Article Title
       </dt>
       <dd>
-        <%= @the_review.book_article_id %>
+        <a href = "/books_articles/<%=@the_review.book_article.id%>"><%= @the_review.book_article.title %></a>
       </dd>
 
       <dt>
-        User
+        Reviewer
       </dt>
       <dd>
-        <%= @the_review.user_id %>
+        <%= @the_review.user.name %>
       </dd>
 
       <dt>
-        Created at
+        Created
       </dt>
       <dd>
         <%= time_ago_in_words(@the_review.created_at) %> ago
       </dd>
 
       <dt>
-        Updated at
+        Updated
       </dt>
       <dd>
         <%= time_ago_in_words(@the_review.updated_at) %> ago
@@ -89,7 +89,13 @@
             Rating
           </label>
 
-          <input type="text" id="rating_box" name="query_rating" value="<%= @the_review.rating %>">
+             <select name="query_rating" id="query_rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            </select>
         </div>
 
         <div>
@@ -102,27 +108,15 @@
 
         <div>
           <label for="recommend_box">
-            Recommend
+            Recommend this book to Others?
           </label>
 
-          <input type="text" id="recommend_box" name="query_recommend" value="<%= @the_review.recommend %>">
+          <select name="query_recommend" id="query_recommend">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
         </div>
 
-        <div>
-          <label for="book_article_id_box">
-            Book article
-          </label>
-
-          <input type="text" id="book_article_id_box" name="query_book_article_id" value="<%= @the_review.book_article_id %>">
-        </div>
-
-        <div>
-          <label for="user_id_box">
-            User
-          </label>
-
-          <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_review.user_id %>">
-        </div>
 
         <button>
           Update review
@@ -164,9 +158,6 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           User
@@ -178,19 +169,17 @@
 
       
         <th>
-          Created at
+          Created
         </th>
 
       </tr>
 
       <% @list_of_comments.each do |comment| %>
       <tr>
-        <td>
-          <%= comment.id %>
-        </td>
+      
 
         <td>
-          <%= comment.user_id %>
+          <%= comment.user.name %>
         </td>
 
         <td>

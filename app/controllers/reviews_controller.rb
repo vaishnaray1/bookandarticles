@@ -29,12 +29,34 @@ class ReviewsController < ApplicationController
     the_review.notes = params.fetch("query_notes")
     the_review.recommend = params.fetch("query_recommend")
     the_review.book_article_id = params.fetch("query_book_article_id")
-   
+    
     the_review.user_id = session[:user_id]
-
+    
     if the_review.valid?
       the_review.save
-      redirect_to("/myreviews", { :notice => "Review created successfully." })
+      tags = params.fetch("query_tags")
+      if tags != ""
+        list_of_tags = params.fetch("query_tags").split(",")
+        list_of_tags.each do |tag|
+          tag = tag.strip
+          the_tag = Tag.new
+          the_tag.tag = tag
+
+          if the_tag.valid?
+            the_tag.save
+          end
+          the_review_tag = ReviewTag.new
+          the_review_tag.tag_id = the_tag.id
+          the_review_tag.review_id = the_review.id
+
+          if the_review_tag.valid?
+            the_review_tag.save
+          end
+        end
+        redirect_to("/myreviews", { :notice => "Review created successfully." })
+      else
+        redirect_to("/myreviews", { :notice => "Review created successfully." })
+      end
     else
       redirect_to("/myreviews", { :notice => "Review failed to create successfully." })
     end

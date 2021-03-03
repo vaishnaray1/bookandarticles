@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Books article #<%= @the_books_article.id %> details
+      Book/Article Title: <%= @the_books_article.title %> 
     </h1>
 
     <div>
@@ -13,7 +13,7 @@
 
       <div>
         <a href="/delete_books_article/<%= @the_books_article.id %>">
-          Delete books article
+          Delete Book/Article
         </a>
       </div>
     </div>
@@ -27,14 +27,14 @@
       </dd>
 
       <dt>
-        Url
+        URL, if online article
       </dt>
       <dd>
         <%= @the_books_article.url %>
       </dd>
 
       <dt>
-        Date published
+        Date Published
       </dt>
       <dd>
         <%= @the_books_article.date_published %>
@@ -58,29 +58,23 @@
         Author
       </dt>
       <dd>
-        <%= @the_books_article.author_id %>
+        <%= @the_books_article.author.name %>
       </dd>
 
       <dt>
-        Created at
+        Added
       </dt>
       <dd>
         <%= time_ago_in_words(@the_books_article.created_at) %> ago
       </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_books_article.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
 
 <hr>
 
-
+<!--
 <div>
   <div>
     <h2>
@@ -142,5 +136,5 @@
     </form>
   </div>
 </div>
+-->
 
-<hr>

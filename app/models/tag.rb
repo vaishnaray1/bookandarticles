@@ -12,4 +12,7 @@ class Tag < ApplicationRecord
   has_many(:book_articles_tags, { :class_name => "BookArticlesTag", :foreign_key => "tag_id", :dependent => :destroy })
 
   has_many(:review_tags, { :class_name => "ReviewTag", :foreign_key => "tag_id", :dependent => :destroy })
+
+  validates(:tag, { :presence => true })
+  validates(:tag, { :uniqueness => true })
 end
