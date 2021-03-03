@@ -9,7 +9,10 @@
 <hr>
 
 <div>
-<h2>You have read <%=@list_of_reviews.count%> books and articles! </h2>
+<%if @list_of_reviews.count >= 2%>
+  <h2>You have read <%=@list_of_reviews.count%> books and articles! </h2>
+<%else%>
+  <h2>Keep reading and reviewing!</h2>
 </div>
 
 
