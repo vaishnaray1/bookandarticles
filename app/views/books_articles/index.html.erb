@@ -15,13 +15,58 @@
     </h2>
 
     <form action="/insert_books_article" method="post">
+
+      <div>
+        <label for="boa_box">
+          Is this a Book or an Article?
+        </label>
+
+       <select id="query_boa" name="query_boa">
+          
+           <option value="Book">Book</option>
+        
+          <option value="Article">Article</option>
+        </select>
+      </div>
+
+      <div>
+      <h3>Fill out the below information, if book </h3> 
+      </div>
       <div>
         <label for="title_box">
-          Title
+          Title, if book
         </label>
 
         <input type="text" id="title_box" name="query_title">
       </div>
+
+        <div>
+        <label for="genre_box">
+          Genre
+        </label>
+        
+        <select id="query_genre" name="query_genre">
+          <%genrearray = BooksArticle.distinct.pluck(:genre)%>
+          <%genrearray.each do |genre|%>
+           <option value="<%=genre%>"><%=genre%></option>
+          <%end%>
+          <option value="Other">Other</option>
+        </select>
+        
+      </div>
+      <div>
+      <label for="other_genre">
+          If you chose the genre of Other, please be more specific. 
+        </label>
+      <input type="text" id="other_genre" name="other_genre">
+      </div>
+
+
+      <div>
+      <h3>Fill out the below information, if article </h3> 
+      </div>
+
+
 
       <div>
         <label for="url_box">
@@ -47,26 +92,7 @@
         <textarea id="description_box" name="query_description" rows="3"></textarea>
       </div>
 
-      <div>
-        <label for="genre_box">
-          Genre
-        </label>
-        
-        <select id="query_genre" name="query_genre">
-          <%genrearray = BooksArticle.distinct.pluck(:genre)%>
-          <%genrearray.each do |genre|%>
-           <option value="<%=genre%>"><%=genre%></option>
-          <%end%>
-          <option value="Other">Other</option>
-        </select>
-        
-      </div>
-      <div>
-      <label for="other_genre">
-          If you chose the genre of Other, please be more specific. 
-        </label>
-      <input type="text" id="other_genre" name="other_genre">
-      </div>
+    
       <div>
         <label for="author_id_box">
           Author
@@ -79,9 +105,14 @@
         </select>
       </div>
 
-      <div>
-        If the author is not in the list, please add him or her <a href="/authors">here</a>
+
+       <div>
+    
+      If the author is not listed, add the author <a href="/authors">here</a>. 
+  
       </div>
+
+
       <div>
       <button>
         Add the book or article
@@ -97,6 +128,9 @@
     <table>
       <tr>
     
+        <th>
+          Book or Article?
+        </th>
 
         <th>
           Title
@@ -136,6 +170,9 @@
       <tr>
       
 
+         <td>
+          <%= a_books_article.BoA %>
+        </td>
         <td>
           <a href="/books_articles/<%= a_books_article.id %>"><%= a_books_article.title %></a>
         </td>

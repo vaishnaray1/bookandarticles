@@ -3,6 +3,7 @@
 # Table name: books_articles
 #
 #  id             :integer          not null, primary key
+#  BoA            :string
 #  date_published :date
 #  description    :text
 #  genre          :string
@@ -20,13 +21,10 @@ class BooksArticle < ApplicationRecord
 
   has_many(:book_articles_tags, { :class_name => "BookArticlesTag", :foreign_key => "book_article_id", :dependent => :destroy })
 
-  validates(:title, { :presence => true })
+  validates(:title, { :presence => true, :uniqueness => true })
+
+  validates(:BoA, { :presence => true})
 
   validates(:genre, { :presence => true })
-  
-  validates(:description, { :presence => true })
-  
-  validates(:date_published, { :presence => true })
 
-  validates(:author_id, { :presence => true })
 end

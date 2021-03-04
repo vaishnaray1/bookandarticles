@@ -13,11 +13,7 @@ class Author < ApplicationRecord
 
   has_many(:books_articles, { :class_name => "BooksArticle", :foreign_key => "author_id", :dependent => :destroy })
 
-  validates(:name, { :presence => true })
-
-  validates(:birthdate, { :presence => true })
-
-  validates(:bio, { :presence => true })
+  validates(:name, { :presence => true, :uniqueness=> true })
 
   
 end

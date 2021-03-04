@@ -18,17 +18,59 @@ class BooksArticlesController < ApplicationController
   end
 
   def create
-    the_books_article = BooksArticle.new
-    if params.fetch("query_genre") =="Other"
-      the_books_article.genre = params.fetch("other_genre")
+    #book
+    if params.fetch("query_boa") == "Book"
+      #get the book from google books
+      require 'googlebooks'
+      title = params.fetch("query_title")
+      books = GoogleBooks.search(title)
+      first_book = books.first
+      
+      the_books_article = BooksArticle.new
+      
+      the_books_article.title = first_book.title
+    
+      the_books_article.date_published = first_book.published_date
+      the_books_article.description = first_book.description
+
+      the_books_article.BoA = params.fetch("query_boa")
+
+      if params.fetch("query_genre") =="Other"
+        the_books_article.genre = params.fetch("other_genre")
+      else
+        the_books_article.genre = params.fetch("query_genre")
+      end
+
+      #look up author in author table 
+      #get the first author from google books
+      author = first_book.authors_array[0]
+      #check if author name in author table
+      author_exist = Author.where({:name => author}).at(0)
+      if author_exist != nil
+        the_books_article.author_id = author_exist.id
+      else  
+        the_author = Author.new
+        the_author.name = author
+        if the_author.valid?
+          the_author.save
+        end
+        the_books_article.author_id = the_author.id
+    
+      end
+
+    #article
     else
-      the_books_article.genre = params.fetch("query_genre")
+      the_books_article.url = params.fetch("query_url")
+      the_books_article.date_published = params.fetch("query_date_published")
+      the_books_article.description = params.fetch("query_description")
+      the_books_article.author_id = params.fetch("query_author_id")
+      the_books_article.title = params.fetch("query_title")
+      if params.fetch("query_genre") =="Other"
+        the_books_article.genre = params.fetch("other_genre")
+      else
+        the_books_article.genre = params.fetch("query_genre")
+      end
     end
-    the_books_article.title = params.fetch("query_title")
-    the_books_article.url = params.fetch("query_url")
-    the_books_article.date_published = params.fetch("query_date_published")
-    the_books_article.description = params.fetch("query_description")
-    the_books_article.author_id = params.fetch("query_author_id")
 
     if the_books_article.valid?
       the_books_article.save

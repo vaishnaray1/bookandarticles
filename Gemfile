@@ -52,3 +52,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'googlebooks', '~> 0.0.9'
