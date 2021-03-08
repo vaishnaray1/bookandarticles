@@ -1,140 +1,217 @@
-<div>
-  <div>
-    <h1>
-      Book/Article Title: <%= @the_books_article.title %> 
-    </h1>
+<head>
+<style>
+ label {
+            display: inline-block;
+            width: 300px;
+          }
+</style>
+</head>
 
+
+
+<body>
+  <div>
     <div>
+      <h1>
+        Book/Article Title: <%= @the_books_article.title %> 
+      </h1>
+
       <div>
-        <a href="/books_articles">
-          Go back
-        </a>
+        <div>
+          <a href="/books_articles">
+            Go back
+          </a>
+        </div>
+
+        <div>
+          <a href="/delete_books_article/<%= @the_books_article.id %>">
+            Delete Book/Article
+          </a>
+        </div>
       </div>
 
-      <div>
-        <a href="/delete_books_article/<%= @the_books_article.id %>">
-          Delete Book/Article
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_books_article.title %>
-      </dd>
-
-      <dt>
-        URL, if online article
-      </dt>
-      <dd>
-        <%= @the_books_article.url %>
-      </dd>
-
-      <dt>
-        Date Published
-      </dt>
-      <dd>
-        <%= @the_books_article.date_published %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_books_article.description %>
-      </dd>
-
-      <dt>
-        Genre
-      </dt>
-      <dd>
-        <%= @the_books_article.genre %>
-      </dd>
-
-      <dt>
-        Author
-      </dt>
-      <dd>
-        <%= @the_books_article.author.name %>
-      </dd>
-
-      <dt>
-        Added
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_books_article.created_at) %> ago
-      </dd>
-
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-<!--
-<div>
-  <div>
-    <h2>
-      Edit books article
-    </h2>
-
-    <form action="/modify_books_article/<%= @the_books_article.id %>"  method="post" >
-      <div>
-        <label for="title_box">
+      <dl>
+        <dt>
           Title
-        </label>
+        </dt>
+        <dd>
+          <%= @the_books_article.title %>
+        </dd>
 
-        <input type="text" id="title_box" name="query_title" value="<%= @the_books_article.title %>">
-      </div>
+        <dt>
+          URL, if online article
+        </dt>
+        <dd>
+          <%= @the_books_article.url %>
+        </dd>
 
-      <div>
-        <label for="url_box">
-          Url
-        </label>
+        <dt>
+          Date Published
+        </dt>
+        <dd>
+          <%= @the_books_article.date_published %>
+        </dd>
 
-        <input type="text" id="url_box" name="query_url" value="<%= @the_books_article.url %>">
-      </div>
-
-      <div>
-        <label for="date_published_box">
-          Date published
-        </label>
-
-        <input type="date" id="date_published_box" name="query_date_published" value="<%= @the_books_article.date_published %>">
-      </div>
-
-      <div>
-        <label for="description_box">
+        <dt>
           Description
-        </label>
+        </dt>
+        <dd>
+          <%= @the_books_article.description %>
+        </dd>
 
-        <textarea id="description_box" name="query_description"><%= @the_books_article.description %></textarea>
-      </div>
-
-      <div>
-        <label for="genre_box">
+        <dt>
           Genre
-        </label>
+        </dt>
+        <dd>
+          <%= @the_books_article.genre %>
+        </dd>
 
-        <input type="text" id="genre_box" name="query_genre" value="<%= @the_books_article.genre %>">
-      </div>
-
-      <div>
-        <label for="author_id_box">
+        <dt>
           Author
-        </label>
+        </dt>
+        <dd>
+          <a href="/authors/<%=@the_books_article.author.id%>"><%= @the_books_article.author.name%></a>
+        </dd>
 
-        <input type="text" id="author_id_box" name="query_author_id" value="<%= @the_books_article.author_id %>">
-      </div>
+        <dt>
+          Added
+        </dt>
+        <dd>
+          <%= time_ago_in_words(@the_books_article.created_at) %> ago
+        </dd>
 
-      <button>
-        Update books article
-      </button>
-    </form>
+      </dl>
+    </div>
   </div>
-</div>
--->
+
+  <hr>
+
+
+  <div>
+    <div class="blue">
+      <h2>
+        Edit Book or Article
+      </h2>
+
+      <form action="/modify_books_article/<%= @the_books_article.id %>"  method="post" >
+        <div class="tab">
+          <label for="boa_box">
+            Is this a Book or an Article?
+          </label>
+
+        <select id="query_boa" name="query_boa">
+            <option selected="selected"><%= @the_books_article.BoA %></option>
+            
+            <%if @the_books_article.BoA =="Article"%>
+              <option value="Book">Book</option>
+            <%else%>
+              <option value="Article">Article</option>
+            <%end%>
+          </select>
+        </div>
+        <br>
+
+        
+    
+        
+        <div class= "tab">
+          <label for="title_box">
+            Title
+          </label>
+
+          <input type="text" id="title_box" name="query_title" value = "<%= @the_books_article.title %>">
+      
+
+          <div>
+          <label for="genre_box">
+            Genre
+          </label>
+          
+          <select id="query_genre" name="query_genre">
+            <option selected="selected"><%= @the_books_article.genre %></option>
+            <%genrearray = BooksArticle.distinct.pluck(:genre)%>
+            <%genrearray.each do |genre|%>
+              <%if genre != @the_books_article.genre%>
+                <option value="<%=genre%>"><%=genre%></option>
+              <%end%>
+            <%end%>
+            <option value="Other">Other</option>
+          </select>
+      
+        </div>
+        <div>
+        <label for="other_genre">
+            If you chose the genre of Other, please be more specific. 
+          </label>
+        <input type="text" id="other_genre" name="other_genre">
+        </div>
+        </div>
+       
+        
+        <br>
+
+    
+        
+
+
+
+        <div class="tab">
+          <label for="url_box">
+            URL, if online article
+          </label>
+
+          <input type="text" id="url_box" name="query_url" value = "<%= @the_books_article.url %>">
+        
+
+          <div>
+            <label for="date_published_box">
+              Date Published
+            </label>
+
+            <input type="date" id="date_published_box" name="query_date_published" value = "<%= @the_books_article.date_published %>">
+          </div>
+
+          <div>
+            <label for="description_box">
+              Description
+            </label>
+
+            <textarea id="description_box" name="query_description" rows="3" cols = "66"><%=@the_books_article.description %></textarea>
+          </div>
+
+      
+          <div >
+            <label for="author_id_box">
+              Author
+            </label>
+
+            <select id="query_author_id" name="query_author_id">
+              <option selected="selected" value="<%= @the_books_article.author.id%>"><%= @the_books_article.author.name %></option>
+              <%Author.all.each do |author|%>
+                  <%if author.id != @the_books_article.author.id%>
+                    <option value="<%=author.id%>"><%=author.name%></option>
+                  <%end%>
+              <%end%>
+            </select>
+          </div>
+      
+
+            <div class = "tab" style= "text-indent: 285px;">
+          
+              <i>If the author is not listed, add the author <a href="/authors">here</a>. </i>
+        
+            </div>
+
+        
+        </div>
+        <div>
+        <br>
+        <button>
+          Modify the book or article
+        </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
 

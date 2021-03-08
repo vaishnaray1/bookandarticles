@@ -53,12 +53,12 @@ class ReviewsController < ApplicationController
             the_review_tag.save
           end
         end
-        redirect_to("/myreviews", { :notice => "Review created successfully." })
+        redirect_to("/myreviews", { :notice => "Review created successfully!" })
       else
-        redirect_to("/myreviews", { :notice => "Review created successfully." })
+        redirect_to("/myreviews", { :notice => "Review created successfully!" })
       end
     else
-      redirect_to("/myreviews", { :notice => "Review failed to create successfully." })
+      redirect_to("/myreviews", { :alert => "Review failed to create successfully" })
     end
   end
 

@@ -1,5 +1,10 @@
 <head>
-
+  <style>
+    label {
+            display: inline-block;
+            width: 300px;
+          }
+  </style>
 </head>
 <body>
 
@@ -11,14 +16,14 @@
 <div>
   <div>
     <h1>
-      List of my reviews
+      List of My Reviews
     </h1>
   </div>
 </div>
 
 <hr>
 
-<div>
+<div style = "color: #8c8c8c;">
 <%if @list_of_reviews.count >= 2%>
   <h2>You have read <%=@list_of_reviews.count%> books and articles! </h2>
 <%else%>
@@ -28,77 +33,82 @@
 
 
 <div>
-  <div>
+  <div class="blue">
     <h2>
       Add a new review
     </h2>
 
-    <form action="/insert_review" method="post">
-        <div>
-        <label for="query_book_article_id">
-          Which book or article is this review for?
-        </label>
+    <br>
 
-        
-          <select name="query_book_article_id" id="query_book_article_id">
-            <%@list_of_book_articles.each do |bookorart|%>
-              <option value="<%=bookorart.id%>"><%=bookorart.title%></option>
-            <%end%>
-          </select>
+    <form action="/insert_review" method="post" class="tab">
+          <div>
 
-       
+            <label for="query_book_article_id">
+              Which book or article is this review for?
+            </label>
+
           
-      </div>
+            <select name="query_book_article_id" id="query_book_article_id" style ="max-width: 500px">
+              <%@list_of_book_articles.each do |bookorart|%>
+                <option value="<%=bookorart.id%>"><%=bookorart.title%></option>
+              <%end%>
+            </select>
+          </div>
+       
+        
+          <div class = "tab" style= "text-indent: 285px;">
+            <i>
+              If the book or article is not in the list, please add it <a href="/books_articles">here</a>
+            </i>
+          </div>
+          <br>
+          <div>
+            <label for="query_rating">
+              Rating
+            </label>
+            <select name="query_rating" id="query_rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+          </div>
 
-      <div>
-        If the book or article is not in the list, please add it <a href="/books_articles">here</a>
-      </div>
+          <br>
 
-      <div>
-        <label for="query_rating">
-          Rating
-        </label>
-        <select name="query_rating" id="query_rating">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-      </div>
+          <div>
+            <label for="query_notes">
+              Notes
+            </label>
 
-      <div>
-        <label for="query_notes">
-          Notes
-        </label>
+            <textarea id="query_notes" name="query_notes" rows="5" cols="66"></textarea>
+          </div>
+          <br>
+          <div>
+            <label for="query_recommend">
+              Recommend to Others?
+            </label>
 
-        <textarea id="query_notes" name="query_notes" rows="5" columns="50"></textarea>
-      </div>
+            <select name="query_recommend" id="query_recommend">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+          </div>
+          <br>
+          <div>
 
-      <div>
-        <label for="query_recommend">
-          Recommend to Others?
-        </label>
-
-        <select name="query_recommend" id="query_recommend">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
-      </div>
-
-      <div>
-
-      <label for ="query_tags">
-          Review Tags (separate each tag by a comma)
-        </label>
-        <textarea id="query_tags" name="query_tags" rows="2" columns="50"></textarea>
-      </div>
-
+            <label for ="query_tags">
+                Review Tags (separate each tag by a comma)
+              </label>
+              <textarea id="query_tags" name="query_tags" rows="1" cols="66"></textarea>
+          </div>
+          <br>
     
-
-      <button>
-        Create review
-      </button>
+          <br>
+          <button>
+            Create review
+          </button>
     </form>
   </div>
 </div>

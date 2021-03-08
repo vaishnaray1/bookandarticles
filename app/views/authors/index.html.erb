@@ -1,3 +1,13 @@
+<head>
+<style>
+ label {
+            display: inline-block;
+            width: 300px;
+          }
+</style>
+</head>
+
+<body>
 <div>
   <div>
     <h1>
@@ -9,19 +19,20 @@
 <hr>
 
 <div>
-  <div>
+  <div class="blue">
     <h2>
       Add a new author
     </h2>
 
     <form action="/insert_author" method="post">
-      <div>
+
+      <div class = "tab">
         <label for="name_box">
           Name
         </label>
 
-        <input type="text" id="name_box" name="query_name">
-      </div>
+        <input type="text" id="name_box" name="query_name" width ="66">
+      
 
       <div>
         <label for="birthdate_box">
@@ -36,9 +47,10 @@
           Bio
         </label>
 
-        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+        <textarea id="bio_box" name="query_bio" rows="3" cols="66"></textarea>
       </div>
-
+      </div>
+      <br>
       <button>
         Create author
       </button>
@@ -51,9 +63,7 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
+       
 
         <th>
           Name
@@ -81,9 +91,7 @@
 
       <% @list_of_authors.each do |an_author| %>
       <tr>
-        <td>
-          <%= an_author.id %>
-        </td>
+      
 
         <td>
           <%= an_author.name %>
@@ -116,3 +124,4 @@
 </div>
 
 <hr>
+</body>

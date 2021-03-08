@@ -1,7 +1,17 @@
+<head>
+<style>
+ label {
+            display: inline-block;
+            width: 300px;
+          }
+</style>
+</head>
+
+<body>
 <div>
   <div>
     <h1>
-      Author #<%= @the_author.id %> details
+      Author: <%= @the_author.name %> 
     </h1>
 
     <div>
@@ -61,19 +71,20 @@
 
 
 <div>
-  <div>
+  <div class= "blue">
     <h2>
       Edit author
     </h2>
 
     <form action="/modify_author/<%= @the_author.id %>"  method="post" >
-      <div>
+
+      <div class="tab">
         <label for="name_box">
           Name
         </label>
 
         <input type="text" id="name_box" name="query_name" value="<%= @the_author.name %>">
-      </div>
+      
 
       <div>
         <label for="birthdate_box">
@@ -90,7 +101,8 @@
 
         <textarea id="bio_box" name="query_bio"><%= @the_author.bio %></textarea>
       </div>
-
+      </div>
+      <br>
       <button>
         Update author
       </button>
@@ -99,3 +111,4 @@
 </div>
 
 <hr>
+</body>
