@@ -60,16 +60,13 @@ class BooksArticlesController < ApplicationController
 
     #article
     else
-      the_books_article.url = params.fetch("query_url")
+      the_books_article = BooksArticle.new
+      the_books_article.BoA = params.fetch("query_boa")
+      the_books_article.url = params.fetch("query_url").to_s
       the_books_article.date_published = params.fetch("query_date_published")
       the_books_article.description = params.fetch("query_description")
       the_books_article.author_id = params.fetch("query_author_id")
       the_books_article.title = params.fetch("query_title")
-      if params.fetch("query_genre") =="Other"
-        the_books_article.genre = params.fetch("other_genre")
-      else
-        the_books_article.genre = params.fetch("query_genre")
-      end
     end
 
     if the_books_article.valid?

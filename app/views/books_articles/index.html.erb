@@ -25,6 +25,7 @@
     <h2>
       Add a new book or article
     </h2>
+    
 
     <form action="/insert_books_article" method="post">
 
@@ -32,6 +33,7 @@
         <label for="boa_box">
           Is this a Book or an Article?
         </label>
+       
 
        <select id="query_boa" name="query_boa">
           
@@ -39,18 +41,21 @@
         
           <option value="Article">Article</option>
         </select>
+        <br>
+         <label for="title_box">
+          Title
+        </label>
+        <input type="text" id="title_box" name="query_title">
       </div>
       <br>
 
       <div class="white">
-      <h4>If you selected Book, fill out the below information </h4> 
+      <h4>If you selected Book, also fill out the below information </h4> 
       
       <div class= "tab">
-        <label for="title_box">
-          Title
-        </label>
+        
 
-        <input type="text" id="title_box" name="query_title">
+        
     
 
         <div>
@@ -79,7 +84,7 @@
       <br>
 
       <div class="white">
-      <h4>If you selected Article, fill out the below information</h4> 
+      <h4>If you selected Article, also fill out the below information</h4> 
       
 
 

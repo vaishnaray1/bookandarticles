@@ -25,6 +25,4 @@ class BooksArticle < ApplicationRecord
 
   validates(:BoA, { :presence => true})
 
-  validates(:genre, { :presence => true })
-
 end
