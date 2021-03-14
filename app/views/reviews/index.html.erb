@@ -25,9 +25,9 @@
 
 <div style = "color: #8c8c8c;">
 <%if @list_of_reviews.count >= 2%>
-  <h2>You have read <%=@list_of_reviews.count%> books and articles! </h2>
+  <h2>You have read <%=@list_of_reviews.count%> books and articles, <%=User.where({:id => session[:user_id]}).at(0).name%>! </h2>
 <%else%>
-  <h2>Keep reading and reviewing!</h2>
+  <h2>Keep reading and reviewing, <%=User.where({:id => session[:user_id]}).at(0).name%>!</h2>
 <%end%>
 </div>
 
