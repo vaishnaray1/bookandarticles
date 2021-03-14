@@ -42,9 +42,14 @@ class ReviewsController < ApplicationController
           the_tag = Tag.new
           the_tag.tag = tag
 
+
           if the_tag.valid?
             the_tag.save
+          else
+            #check if tag name in tag table
+            the_tag = Tag.where({:tag => tag}).at(0)
           end
+          
           the_review_tag = ReviewTag.new
           the_review_tag.tag_id = the_tag.id
           the_review_tag.review_id = the_review.id
@@ -96,6 +101,6 @@ class ReviewsController < ApplicationController
 
     the_review.destroy
 
-    redirect_to("/reviews", { :notice => "Review deleted successfully."} )
+    redirect_to("/myreviews", { :notice => "Review deleted successfully."} )
   end
 end

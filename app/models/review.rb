@@ -24,5 +24,5 @@ class Review < ApplicationRecord
 
   validates(:rating, { :presence => true })
   validates(:book_article_id, { :presence => true })
-  validates(:book_article_id, { :uniqueness => true })
+
 end
